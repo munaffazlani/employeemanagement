@@ -38,7 +38,7 @@ const actions = {
     payload,
   }),
   login: (payload, history) => {
-    return (dispatch) => {
+    return async(dispatch) => {
       dispatch(actions.loginRequest(history));
       const { email, password } = payload;
       var authenticationData = {
@@ -54,7 +54,7 @@ const actions = {
       };
       const cognitoUser = new CognitoUser(userData);
 
-      cognitoUser.authenticateUser(authenticationDetails, {
+      await cognitoUser.authenticateUser(authenticationDetails, {
         onSuccess: function (session) {
           const tokens = {
             accessToken: session.getAccessToken().getJwtToken(),

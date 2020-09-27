@@ -19,11 +19,11 @@ const actions = {
     payload,
   }),
   fetchingEmployeData: () => {
-    return (dispatch) => {
+    return async (dispatch) => {
       //Dispatch the fetchData action creator before retrieving to set our loading state to true.
       dispatch(actions.getEmployeeDetails());
       //Then get the data.
-      Axios.get(proxy + url)
+      await Axios.get(proxy + url)
         .then((res) => {
           console.log(res);
           dispatch(actions.getEmployeeDetailsSuccess(res.data.Items));

@@ -1,7 +1,6 @@
 import React, {lazy, Suspense } from "react";
 import ErrorBoundary from "./ErrorBoundary";
 import Loader from "./components/utility/loader";
-
 import {
   BrowserRouter as Router,
   Link,
@@ -14,8 +13,6 @@ import "antd/dist/antd.css";
 
 const Dashboard = lazy(() => import("./pages/dashboard/dashboard"));
 const LoginForm = lazy(() => import("./pages/loginForm/loginForm"));
-
-
 
 function App() {
   return (
