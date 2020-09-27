@@ -1,4 +1,6 @@
 import Axios from "axios";
+import { message } from "antd";
+
 const proxy = "https://cors-anywhere.herokuapp.com/";
 const url =
   "https://hgreqzovxl.execute-api.us-east-2.amazonaws.com/development/getitem";
@@ -29,7 +31,10 @@ const actions = {
           dispatch(actions.getEmployeeDetailsSuccess(res.data.Items));
           //Error handle the promise and set your errorMessage
         })
-        .catch((err) => dispatch(actions.getEmployeeDetailsFailed(err)));
+        .catch((err) => {
+          message.error(err.message);
+          dispatch(actions.getEmployeeDetailsFailed(err));
+        });
     };
   },
 };

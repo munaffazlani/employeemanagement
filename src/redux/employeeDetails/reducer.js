@@ -1,12 +1,11 @@
 import actions from "./actions";
-import { message } from "antd";
 
 const initialState = {
   loading: false,
   employeeDetails: [],
 };
 
-export default function employeeDetailsRedu(state = initialState, action) {
+export default function employeeDetailsReducer(state = initialState, action) {
   switch (action.type) {
     case actions.GET_EMPLOYEE_DETAILS:
       return {
@@ -20,15 +19,12 @@ export default function employeeDetailsRedu(state = initialState, action) {
         loading: false,
       };
     case actions.GET_EMPLOYEE_DETAILS_FAILED:
-      message.error(action.payload.message)
       return {
         ...state,
         errorMessage: action.payload,
         loading: false,
       };
 
-    case actions.LOGOUT:
-      return initialState;
     default:
       return state;
   }

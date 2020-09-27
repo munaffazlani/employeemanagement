@@ -8,7 +8,7 @@ const { Header } = Layout;
 function AppHeader({ history }) {
   const dispatch = useDispatch();
   const handleLogout = () => {
-    dispatch(authActions.logout(history));
+    dispatch(authActions.loggingOut(history));
   };
   return (
     <Header className="header">

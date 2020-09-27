@@ -9,21 +9,21 @@ import Loader from "../../components/utility/loader";
 import AppHeader from "../../components/header/header";
 import "./dashboard.css";
 const { Content } = Layout;
-function Dashboard() {
+function Dashboard({ history }) {
   const dispatch = useDispatch();
-
+  const loading = useSelector((state) => state.employeeDetails.loading);
   const employeeDetails = useSelector(
     (state) => state.employeeDetails.employeeDetails
   );
 
-  useEffect(async () => {
+  useEffect(() => {
     dispatch(employeeActions.fetchingEmployeData());
   }, []);
 
-  if (employeeDetails) {
+  if (!loading) {
     return (
       <Layout>
-        <AppHeader />
+        <AppHeader history={history} />
         <Layout>
           <SideMenu employeeDetails={employeeDetails} />
           <Layout style={{ padding: "0 24px 24px" }}>

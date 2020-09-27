@@ -17,8 +17,6 @@ export default function authReducer(state = initialState, action) {
         loading: true,
       };
     case actions.LOGIN_SUCCESS:
-      action.history.push("/dashboard");
-      message.success("logged in");
       return {
         ...state,
         userToken: action.token,
@@ -26,7 +24,6 @@ export default function authReducer(state = initialState, action) {
         loading: false,
       };
     case actions.LOGIN_ERROR:
-      message.error(action.payload);
       return {
         ...state,
         error: action.payload,
@@ -39,8 +36,6 @@ export default function authReducer(state = initialState, action) {
         userToken: action.token,
       };
     case actions.LOGOUT:
-      action.history.push("/");
-      message.success("logged out");
       return initialState;
     default:
       return state;

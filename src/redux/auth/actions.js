@@ -3,7 +3,7 @@ import {
   CognitoUser,
   AuthenticationDetails,
 } from "amazon-cognito-identity-js";
-
+import { message } from "antd";
 const poolData = {
   UserPoolId: "us-east-2_HeeRdd2A9",
   ClientId: "6r13ho0idugsapi4t7gue3b381",
@@ -20,9 +20,8 @@ const actions = {
   checkAuthorization: () => {
     return { type: actions.CHECK_AUTHORIZATION };
   },
-  logout: (history) => ({
+  logout: () => ({
     type: actions.LOGOUT,
-    history,
   }),
   loginRequest: (history) => ({
     type: actions.LOGIN_REQUEST,
@@ -38,7 +37,7 @@ const actions = {
     payload,
   }),
   login: (payload, history) => {
-    return async(dispatch) => {
+    return async (dispatch) => {
       dispatch(actions.loginRequest(history));
       const { email, password } = payload;
       var authenticationData = {
@@ -62,14 +61,24 @@ const actions = {
             refreshToken: session.getRefreshToken().getToken(),
           };
           console.log(tokens);
-          dispatch(actions.loginSuccess(tokens.accessToken, history));
+          message.success("logged in");
+          dispatch(actions.loginSuccess(tokens.accessToken));
           cognitoUser["tokens"] = tokens; // Save tokens for later use
+          history.push("/dashboard");
         },
         onFailure: function (err) {
           console.log(err);
+          message.error(err.message);
           dispatch(actions.loginError(err.message));
         },
       });
+    };
+  },
+  loggingOut: (history) => {
+    return (dispatch) => {
+      dispatch(actions.logout());
+      history.push("/");
+      message.success("logged out");
     };
   },
 };
