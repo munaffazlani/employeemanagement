@@ -1,0 +1,17 @@
+#loader {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: 10000000000;
+  top: 0;
+  right: 0;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1220px) {
+  #loader {
+    width: calc(100% - 80px);
+  }
+}

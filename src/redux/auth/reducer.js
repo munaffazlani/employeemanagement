@@ -1,4 +1,5 @@
 import actions from "./actions";
+import { message } from "antd";
 
 const initialState = {
   userToken: null,
@@ -11,12 +12,13 @@ const initialState = {
 export default function authReducer(state = initialState, action) {
   switch (action.type) {
     case actions.LOGIN_REQUEST:
-      action.history.push("/dashboard");
       return {
         ...state,
         loading: true,
       };
     case actions.LOGIN_SUCCESS:
+      action.history.push("/dashboard");
+      message.success("logged in");
       return {
         ...state,
         userToken: action.token,
@@ -24,11 +26,12 @@ export default function authReducer(state = initialState, action) {
         loading: false,
       };
     case actions.LOGIN_ERROR:
+      message.error(action.payload);
       return {
         ...state,
-        userToken: action.token,
+        error: action.payload,
         authorized: false,
-        loading: false,
+        loading: false, 
       };
     case actions.CHECK_AUTHORIZATION:
       return {
@@ -36,6 +39,8 @@ export default function authReducer(state = initialState, action) {
         userToken: action.token,
       };
     case actions.LOGOUT:
+      action.history.push("/");
+      message.success("logged out");
       return initialState;
     default:
       return state;
