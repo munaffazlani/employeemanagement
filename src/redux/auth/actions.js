@@ -4,6 +4,34 @@ import {
   AuthenticationDetails,
 } from "amazon-cognito-identity-js";
 import { message } from "antd";
+import Parse from 'parse'
+// Parse Config
+Parse.serverURL = "https://parseapi.back4app.com"; // This is your Server URL
+Parse.initialize(
+  "BupudqLoT9zk0gVByWkpqvJnDaWbjRL1s135gJ2H", // This is your Application ID
+  "yCVDrudkwESQowwdPT62fZ2HjMkftC84XsRWgbMv" // This is your Javascript key
+);
+var user = new Parse.User();
+user.set("username", "my name");
+user.set("password", "my pass");
+user.set("email", "email@example.com");
+
+// // other fields can be set just like with Parse.Object
+// user
+//   .signUp()
+//   .then((user) => {
+//     if (typeof document !== "undefined")
+//       document.write(`User signed up: ${JSON.stringify(user)}`);
+//     console.log("User signed up", user);
+//   })
+//   .catch((error) => {
+//     if (typeof document !== "undefined")
+//       document.write(`Error while signing up user: ${JSON.stringify(error)}`);
+//     console.error("Error while signing up user", error);
+//   });
+
+// Parse End
+
 const poolData = {
   UserPoolId: "us-east-2_HeeRdd2A9",
   ClientId: "6r13ho0idugsapi4t7gue3b381",
